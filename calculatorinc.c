@@ -9,6 +9,9 @@ there is some problem.there is also some problem
 in the brackets and sign push and pop in stack.
 also add float capability in this programm.
 
+also i found that (50/5)+1 doesn't work while
+50/5+1 gives right answer.
+
 the main problem in this programs is found.
 that is it contains a string returning functions
 and tries to modify that string. instead what should
@@ -155,6 +158,14 @@ int main(){
     printf("\n \n**-- Calculator --**\n");
     printf("Enter expression: ");
     fgets(b,sizeof(b),stdin);
+    for(int i=0;b[i]!='\0';i++){ // removes \n added by fgets
+        if(b[i]=='\0'){
+            if(b[i-1]=='\n'){
+                b[i-1]=='\0';
+            }
+        }
+    }
+    printf("String length :%s",b);
     char str[50];
     infToPost(b,str);
     int tt =calculatepostfix(str);
