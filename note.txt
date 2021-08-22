@@ -1,2 +1,0 @@
-Note that fgets adds \n before a \0
-while taking a string.
