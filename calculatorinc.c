@@ -1,27 +1,14 @@
-/* Program to calculate eqn in c. You can calculate
-basic clculations like (9*9+80-88/5). 
-this program has some loop hole due to which
-the program inverts the order from input 
-eg 4/2 => 2/4 (etc) 
-their is something wrong in inserting the string
-to the stack and retreiving them, thats why 
-there is some problem.there is also some problem
-in the brackets and sign push and pop in stack.
-also add float capability in this programm.
+/*Some test cases 
+Input :- (9*9+80-88/5)
+Output:- 144
 
-also i found that (50/5)+1 doesn't work while
-50/5+1 gives right answer.
-
-the main problem in this programs is found.
-that is it contains a string returning functions
-and tries to modify that string. instead what should
-be done is pass the pointer no return pointer .
+Input :-  9*(9-(9/3))+10
+Output:- 64
 */
 #include <stdio.h> 
 #include <string.h>
 #include "stackforcalc.h"
 
-// char str[50];
 
 int isOperand(char b){
     if(b>='0' && b<='9'){
@@ -90,7 +77,7 @@ int infToPost(char *b,char *str){
 
         else if(b[i] ==')'){
             while(!empty() && gettop() != '('){
-                str[i]=gettop();
+                str[j]=gettop();
                 j++;
                 pop();
             }
@@ -111,13 +98,13 @@ int Evaluate(int t,char y,int r){
         ty=t+r;
         break;
         case '-':
-        ty=r-t; //i inverted this.
+        ty=r-t;
         break;
         case '*':
-        ty=r*t; //i inverted this.
+        ty=r*t;
         break;
         case '/':
-        ty=r/t; //i inverted this.
+        ty=r/t;
         break;
         default:
         ty=-1;
@@ -154,20 +141,33 @@ int calculatepostfix(char *c){
 }
 
 int main(){
-    char b[65];
-    printf("\n \n**-- Calculator --**\n");
-    printf("Enter expression: ");
-    fgets(b,sizeof(b),stdin);
-    for(int i=0;b[i]!='\0';i++){ // removes \n added by fgets
-        if(b[i]=='\0'){
-            if(b[i-1]=='\n'){
-                b[i-1]=='\0';
+    for(int cont;1;cont++){
+        char b[65],what,str[65];
+
+        printf("\n\t\t***-- Calculator --***\n");
+        printf("\t\tEnter expression: ");
+        fflush(stdin);
+        fgets(b,sizeof(b),stdin);
+
+        for(int i=0;b[i]!='\0';i++){ // removes \n added by fgets
+            if(b[i]=='\0'){
+                if(b[i-1]=='\n'){
+                    b[i-1]=='\0';
+                }
             }
         }
+
+        infToPost(b,str);
+        int tt =calculatepostfix(str);
+        printf("\t\tYour answer is: %d\n\n\t\t",tt);
+
+        printf("Do you want to continue?(Y/N)\n\t\t");
+        scanf("%c",&what);
+        if(what=='Y' || what=='y'){
+            continue;
+        }else {
+            break;
+        }
     }
-    printf("String length :%s",b);
-    char str[50];
-    infToPost(b,str);
-    int tt =calculatepostfix(str);
-    printf("Your answer is: %d",tt);
+    return 0;
 }
