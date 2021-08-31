@@ -148,11 +148,11 @@ int main(){
         printf("\t\tEnter expression: ");
         fflush(stdin);
         fgets(b,sizeof(b),stdin);
-
+        
         for(int i=0;b[i]!='\0';i++){ // removes \n added by fgets
             if(b[i]=='\0'){
                 if(b[i-1]=='\n'){
-                    b[i-1]=='\0';
+                    b[i-1]='\0';
                 }
             }
         }
