@@ -120,7 +120,7 @@ int calculatepostfix(char *c){
         }
 
         else if(isOperator(c[i])){
-            int op1=gettop2();
+            int op1=gettop2(); // This reverses the op1 and op2. 
             pop2();
             int op2=gettop2();
             pop2();
